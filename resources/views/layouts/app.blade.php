@@ -19,13 +19,15 @@
     <!-- navbar -->
     @include('includes.navbar')
 
-    <!-- page content -->
+    {{-- page content --}}
     @yield('content')
+
     <!-- footer -->
     @include('includes.footer')
+    
     <!-- Bootstrap core JavaScript -->
-      @stack('prepend-script')
-      @include('includes.script')
-      @stack('addon-script')
+    @stack('prepend-script')
+    @include('includes.script')
+    @stack('addon-script')
   </body>
 </html>

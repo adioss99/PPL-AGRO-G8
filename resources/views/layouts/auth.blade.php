@@ -12,7 +12,7 @@
     @stack('prepend-style')
     @include('includes.style')
     @stack('addon-style')
-    
+
     </head>
 
   <body>
@@ -22,7 +22,7 @@
     <!-- page content -->
     {{-- @yield('content') --}}
     <!-- footer -->
-    {{-- @include('includes.footer') --}}
+    @include('includes.footer')
     <!-- Bootstrap core JavaScript -->
       @stack('prepend-script')
       @include('includes.script')
