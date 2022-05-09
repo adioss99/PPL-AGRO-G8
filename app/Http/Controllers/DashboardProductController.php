@@ -28,6 +28,7 @@ class DashboardProductController extends Controller
         
     }
 
+
     // admin
     public function create()
     {   
@@ -50,7 +51,7 @@ class DashboardProductController extends Controller
         ];
         ProductGallery::create($gallery);
 
-        return redirect()->route('/product');
+        return redirect()->route('product.index')->with('toast_success','Data produk berhasil ditambahkan');
     }
 
     public function edit(Request $request, $id)
@@ -73,17 +74,14 @@ class DashboardProductController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('toast_success','Data berhasil diperbarui');
     }
 
     public function uploadGallery(Request $request)
     {   
         $data = $request->all();
-
         $data['photos'] = $request->file('photos')->store('assets/product','public');
-
         ProductGallery::create($data);
-
         return redirect()->route('dashboard-products-edit',$request->products_id);
     }
 
@@ -92,7 +90,6 @@ class DashboardProductController extends Controller
         $item->delete();
 
         return redirect()->route('dashboard-products-edit',$item->products_id);
-
     }
 
 }

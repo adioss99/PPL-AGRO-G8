@@ -70,27 +70,27 @@
                     <div class="form-group">
                       <label>Roles</label>
                       @if ($item->id == 1)                            
-                        <option value="{{ $item->roles }}" disabled>{{ $item->roles }}</option>
+                        <option value="{{ $item->roles }}" >{{ $item->roles }}</option>
                       @else                            
                         <select name="roles" required class="form-control">
                           <option value="{{ $item->roles }}" selected>Tidak diganti</option>
                           <option value="ADMIN">Admin</option>
                           <option value="USER">User</option>
                         </select>
-                        @endif
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col text-right">
-                    <button
+                  <div class="row">
+                    <div class="col text-right">
+                      <button
                       type="submit"
                       class="btn btn-success px-5"
-                    >
+                      >
                       Simpan
                     </button>
+                    </div>
                   </div>
-              </div>
+                @endif
             </div>
           </form>
         </div>

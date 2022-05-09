@@ -22,7 +22,7 @@ class CartController extends Controller
     public function delete(Request $request, $id){
         $cart = Cart::findOrFail($id);
         $cart->delete();
-        return redirect()->route('cart')->with('toast_success','Berhasil dihapus');;
+        return redirect()->route('cart')->with('toast_success','Berhasil dihapus');
     }
 
 }

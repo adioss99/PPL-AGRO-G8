@@ -28,29 +28,9 @@ class UserController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
-                        <div class="btn-group">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle mr-1 mb-1" 
-                                    type="button" id="action' .  $item->id . '"
-                                        data-toggle="dropdown" 
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                        <i class="bi bi-gear-fill"></i>
-                                </button>
-
-                                <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                    <a class="dropdown-item" href="' . route('user.edit', $item->id) . '">
-                                        Edit <i class="bi bi-pencil-square"></i>
-                                    </a>                                    
-                                    <form action="' . route('user.destroy', $item->id) . '" method="POST">
-                                        ' . method_field('delete') . csrf_field() . '
-                                        <button type="submit" class="dropdown-item text-danger">
-                                            Hapus <i class="bi bi-trash3-fill"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                    </div>';
+                        <a class="btn btn-primary" href="' . route('user.edit', $item->id) . '">
+                            Edit <i class="bi bi-pencil-square"></i>
+                        </a>';
                 })
                 ->rawColumns(['action'])
                 ->make();
@@ -137,7 +117,7 @@ class UserController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('toast_success','Data user berhasil diperbarui');
     }
 
     /**

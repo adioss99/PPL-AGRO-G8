@@ -79,6 +79,7 @@
                           </div>
                           <div class="row">
                             <div class="col text-right">
+                              <a class="btn btn-secondary px-5" href="{{route('dashboard-accounts')}}">Batal</a>
                               <button
                                 type="submit"
                                 class="btn btn-success px-5"

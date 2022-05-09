@@ -5,7 +5,27 @@ Product list
 @endsection
 
 @section('content')
-
+{{-- delete --}}
+<div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="deleteProductModalLabel" aria-hidden="true" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteProductModalLabel">Hapus Produk <i class="bi bi-exclamation-circle text-danger"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Yakin untuk menghapus produk ini?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <a type="button" class="yesDelete btn btn-danger text-white" >Ya</a>
+      </div>
+    </div>
+  </div>
+</div>
+@include('sweetalert::alert')
 <!-- Section Content -->
 <div
     class="section-content section-dashboard-home"
@@ -75,6 +95,19 @@ Product list
             ]
         });
     </script>
+    <script>
+        // modal style
+        $('.modal').click(function(event){
+            $(event.target).modal('hide');
+        });
+    </script>
+    <script>
+        // delete script
+        $(".yesDelete").click(function(){
+            $(".finalDelete").click(); 
+            return false;
+        });
+        </script>
 @endpush
 
 

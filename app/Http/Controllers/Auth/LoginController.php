@@ -74,6 +74,7 @@ class LoginController extends Controller
             return route('pages.admin-dashboard');
         }
     }
+    
     public function logout()
     {
         Auth::logout();

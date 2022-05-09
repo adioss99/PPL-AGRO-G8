@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+@include('sweetalert::alert')
         <div
         class="section-content section-dashboard-home"
         data-aos="fade-up"

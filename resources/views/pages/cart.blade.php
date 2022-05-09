@@ -5,6 +5,48 @@
 @endsection
 
 @section('content')
+{{-- delete --}}
+<div class="modal fade" id="deleteCartModal" tabindex="-1" role="dialog" aria-labelledby="deleteCartModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteCartModalLabel">Hapus cart <i class="bi bi-exclamation-circle text-danger"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Yakin?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <a type="button" class="yesDelete btn btn-danger text-white" >Ya</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- Chat WA --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Custom Packing</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Custom Packaging akan
+          tersambung ke WhatsApp</p>
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-success"href="https://wa.me/628113780510" target="_blank">Pesan</a>
+      </div>
+    </div>
+  </div>
+</div>
+
     <div class="page-content page-cart">
       <section
         class="store-breadcrumbs"
@@ -66,15 +108,15 @@
                     <td class="cart-product-quantity mr-3" style="width: 15%" >
                       <div class="product-title">{{ $cart->qty }}</div>
                     </td>
-                    {{-- er --}}
                     <td style="width: 25%;" >
                       <div class="product-title">{{Str::rupiah( $cart->product->price )}}</div>
                     </td>
                     <td style="width: 20%;">
+                      <button class="btn btn-remove-cart" data-toggle="modal" data-target="#deleteCartModal"><i class="bi bi-trash3-fill"></i></button>
                       <form action="{{route('cart-delete',$cart->id)}}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button class="btn btn-remove-cart">
+                        <button class="finalDelete btn btn-remove-cart"  data-toggle="modal" id="deleteButtonConfirmation" hidden>
                           Hapus
                         </button>
                       </form>
@@ -84,6 +126,8 @@
                   @endforeach
                 </tbody>
               </table>
+              @php $ongkir = 100000 @endphp
+              @php $total = $ongkir + $totalPrice @endphp
             </div>
           </div>
           <div class="row" data-aos="fade-up" data-aos-delay="150">
@@ -97,7 +141,10 @@
               <h2 class="mb-4">Detail Pengiriman</h2>
             </div>
           </div>
-          <form action="">
+          <form action="{{route('checkout')}}" enctype="multipart/form-data" method="POST">
+            @csrf
+            <input type="hidden" name="shipping_price" value="{{$ongkir}}">
+            <input type="hidden" name="total_price" value="{{$total}}">
             <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
               <div class="col-md-6">
                 <div class="form-group">
@@ -139,25 +186,13 @@
               </div>
               <div class="col-md-6">
                 <br>
-                {{-- <div class="form-group">
-                  <label for="postalCode">Kode POS</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="postalCode"
-                    name="postalCode"
-                    value=""
-                  />
-                </div> --}}
-              {{-- </div>
-              <div class="col text-right mt-1"> --}}
-                <a href="#" class="btn btn-outline-success ">    
-                  Custom Packing <i class="bi bi-whatsapp" style="font-size: 15px;"></i>
-                </a>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="150">
-              <div class="col-12">
+              <div class="col-12 text-right">                
+                <button type="button"class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">    
+                  Custom Packing <i class="bi bi-whatsapp" style="font-size: 15px;"></i>
+                </button>
                 <hr />
               </div>
               <div class="col-12">
@@ -168,7 +203,6 @@
               <div class="col-4 col-md-2"></div>
               <div class="col-4 col-md-3"></div>
               <div class="col-4 col-md-2">
-                @php $ongkir = 100000 @endphp
                 <div class="product-title">{{Str::rupiah($ongkir)}}</div>
                 <div class="product-subtitle">Ongkir</div>
               </div>
@@ -186,16 +220,16 @@
                   </button>
                 </div>
                 @else                    
-                  <div class="product-title text-success">{{Str::rupiah( $ongkir + $totalPrice)}}</div>
+                  <div class="product-title text-success">{{Str::rupiah($total)}}</div>
                   <div class="product-subtitle">Total</div>
                 </div>
                 <div class="col-8 col-md-3">
-                  <a
-                  href="#"
+                  <button
+                  type="submit"
                   class="btn btn-success mt-4 px-4 btn-block"
                   >
                   Pesan Sekarang
-                  </a>
+                  </button>
                 </div>
               @endif
             </div>
@@ -206,6 +240,13 @@
 @endsection
 
 @push('addon-script')
+<script>
+// delete script
+  $(".yesDelete").click(function(){
+    $(".finalDelete").click(); 
+    return false;
+  });
+</script>
 {{-- <script>
   $(document).ready(function(){
      $('.increment-btn').click(function (e) {
@@ -231,4 +272,5 @@
      });
 });
 </script> --}}
+
 @endpush

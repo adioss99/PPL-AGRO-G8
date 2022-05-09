@@ -34,6 +34,6 @@ class DashboardAccountController extends Controller
 
         auth()->user()->update($acc);
         
-        return redirect()->route('dashboard-accounts');
+        return redirect()->route('dashboard-accounts')->with('toast_success','Berhasil Mengupdate Profile Anda');
     }
 }

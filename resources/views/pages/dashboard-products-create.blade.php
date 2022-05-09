@@ -42,7 +42,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="name">Nama Produk</label>
-                                            <input type="text" class="form-control" id="name" aria-describedby="name" name="name" />
+                                            <input type="text" class="form-control" id="name" aria-describedby="name" name="name"required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -50,7 +50,7 @@
                                             <label for="price">Harga</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">Rp</span>
-                                                <input type="number" class="form-control" id="price" aria-describedby="price" name="price"/>
+                                                <input type="number" class="form-control" id="price" aria-describedby="price" name="price"required/>
                                             </div>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label for="weight">Berat</label>
                                             <div class="input-group mb-3">
-                                                <input type="number" class="form-control" id="weight" aria-describedby="weight" name="weight"/>
+                                                <input type="number" class="form-control" id="weight" aria-describedby="weight" name="weight"required/>
                                                 <span class="input-group-text" id="basic-addon">kg</span>
                                             </div>
                                         </div>
@@ -66,19 +66,20 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="description">Deskripsi</label>
-                                            <textarea name="description" class="form-control"></textarea>
+                                            <textarea name="description" class="form-control"required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Thumbnails</label>
-                                            <input type="file" name="photo" class="form-control" />
+                                            <input type="file" name="photo" class="form-control" required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-right">
-                                        <button type="submit" class="btn btn-success btn-block px-5">Simpan</button>
+                                        <a class="btn btn-secondary mr-1 text-white px-5" href="{{route('product.index')}}">Batal</a>
+                                        <button type="submit" class="btn btn-success px-5">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -90,15 +91,3 @@
     </div>
 </div>
 @endsection
-{{-- 
-@push('addon-script')
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script>
-    function thisFileUpload() {
-    document.getElementById('file').click();
-    }
-</script>
-<script>
-    CKEDITOR.replace("editor");
-</script>
-@endpush --}}

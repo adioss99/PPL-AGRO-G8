@@ -13,18 +13,33 @@ class CheckoutController extends Controller
 {
    public function process(Request $request){
 
-    $user = Auth::user();
-    $user->update($request->except('total_price'));
-    
-    $code = 'TRX-' . mt_rand(0000,9999);
+      $user = Auth::user();
+      // $user->update($request->except('total_price'));
 
-    $transaction = Transaction::create([
-            'users_id' => Auth::user()->id,
-            'inscurance_price' => 0,
-            'shipping_price' => 0,
-            'total_price' => $request->total_price,
-            'transaction_status' => 'PENDING',
-            'code' => $code
-        ]);
+      $carts = Cart::with(['product','user'])
+            ->where('user_id',Auth::user()->id)
+            ->get();
+      
+      $code = 'TRX-' . mt_rand(0000,9999);
+
+      $transaction = Transaction::create([
+         'users_id' => Auth::user()->id,
+         'shipping_price' => 100000,
+         'total_price' => $request->total_price,
+         'transaction_status' => 'PENDING',
+         'resi' => ' ',
+         'code' => $code
+      ]);
+
+      foreach($carts as $cart){
+         TransactionDetail::create([
+            'transactions_id' => $transaction->id,
+            'products_id' => $cart->product->id,
+            'price' => $cart->product->price,
+            'code' => $code,
+            'qty'=> $cart->qty     
+         ]);
+      }
+      return redirect()->route('cart')->with('success','Berhasil menambahkan pesanan');
    }
 }

@@ -70,9 +70,10 @@
                                         <textarea name="description" class="form-control">{!! $product->description !!}</textarea>
                                     </div>
                                 </div>
-                                <div class="row pl-3">
+                                <div class="row">
                                     <div class="col text-right">
-                                        <button type="submit" class="btn btn-success btn-block px-5">Simpan</button>
+                                        <a class="btn btn-secondary mr-1 text-white px-5" href="{{route('product.index')}}">Batal</a>
+                                        <button type="submit" class="btn btn-success px-5">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -105,19 +106,19 @@
                                 @csrf
                                 <input type="hidden" value="{{ $product->id }}" name="products_id">
                                 <input
-                                type="file"
-                                name="photos"
-                                id="file"
-                                style="display: none;"
-                                multiple
-                                onchange="form.submit()"
+                                    type="file"
+                                    name="photos"
+                                    id="file"
+                                    style="display: none;"
+                                    multiple
+                                    onchange="form.submit()"
                                 />
                                 <button
-                                type="button"
-                                class="btn btn-secondary btn-block mt-3"
-                                onclick="thisFileUpload()"
+                                    type="button"
+                                    class="btn btn-secondary btn-block mt-3"
+                                    onclick="thisFileUpload()"
                                 >
-                                Add Photo
+                                Tambah Gambar
                                 </button>
                             </form>
                         </div>
@@ -132,24 +133,9 @@
 @endsection
 
 @push('addon-script')
-<script>
-$('.simpan').click(function(){
-    swal({
-        title: "Yakin?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-            swal("Poof! Your imaginary file has been deleted!", {
-            icon: "success",
-            });
-        } else {
-            swal("Your imaginary file is safe!");
-        }
-        });
-})
-</script>
+  <script>
+    function thisFileUpload() {
+      document.getElementById("file").click();
+    }
+  </script>
 @endpush

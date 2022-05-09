@@ -45,9 +45,12 @@ class ProductController extends Controller
                                     <a class="dropdown-item " href="' . route('dashboard-products-edit', $item->id) . '">
                                         Edit   <i class="bi bi-pencil-square"></i>
                                     </a>
+                                    <button type="submit" class="dropdown-item text-danger" data-toggle="modal" data-target="#deleteProductModal">
+                                        Hapus<i class="bi bi-trash3-fill"></i>
+                                    </button>
                                     <form action="' . route('product.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
-                                        <button type="submit" class="dropdown-item text-danger ">
+                                        <button type="submit" class="finalDelete dropdown-item text-danger " hidden>
                                           Hapus   <i class="bi bi-trash3-fill"></i>
                                         </button>
                                     </form>
@@ -152,6 +155,6 @@ class ProductController extends Controller
         $item = Product::findorFail($id);
         $item->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('toast_success','Produk Berhasil Dihapus');
     }
 }
