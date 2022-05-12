@@ -11,6 +11,7 @@ class TransactionDetail extends Model
         'products_id',
         'price',        
         'qty',        
+        'total',        
         'code',        
     ];
 }

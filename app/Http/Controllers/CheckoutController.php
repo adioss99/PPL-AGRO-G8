@@ -37,9 +37,13 @@ class CheckoutController extends Controller
             'products_id' => $cart->product->id,
             'price' => $cart->product->price,
             'code' => $code,
-            'qty'=> $cart->qty     
+            'qty'=> $cart->qty,  
+            'total'=> $cart->qty * $cart->product->price   
          ]);
       }
+      Cart::with(['product','user'])
+                ->where('user_id',Auth::user()->id)
+                ->delete();
       return redirect()->route('cart')->with('success','Berhasil menambahkan pesanan');
    }
 }

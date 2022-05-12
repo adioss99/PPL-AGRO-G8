@@ -57,6 +57,7 @@ Route::group(['prefix'=>'user','middleware'=>['IsUser','auth','PreventBackHistor
     
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart-delete');
+    Route::get('/cart/change-qty/{product}',[ CartController::class, 'changeQty'])->name('change_qty');
     
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout');
 });

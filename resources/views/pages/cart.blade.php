@@ -16,7 +16,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Yakin?</p>
+        <p>Yakin ingin menghapus produk ini dari cart?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -71,7 +71,7 @@
       </section>
       <section class="store-cart">
         <div class="container">
-          <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="row product_data" data-aos="fade-up" data-aos-delay="100">
             <div class="col-12 table-responsive">
               <table
                 class="table table-borderless table-cart"
@@ -82,7 +82,7 @@
                     <th scope="col">Gambar</th>
                     <th scope="col">Produk</th>
                     <th scope="col">Harga</th>
-                    <th scope="col">Jml</th>
+                    <th scope="col">Jumlah</th>
                     <th scope="col">Total</th>
                     <th scope="col">Menu</th>
                   </tr>
@@ -105,11 +105,42 @@
                     <td style="width: 20%;">
                       <div class="product-title">{{Str::rupiah( $cart->product->price )}}</div>
                     </td>
-                    <td class="cart-product-quantity mr-3" style="width: 15%" >
-                      <div class="product-title">{{ $cart->qty }}</div>
+                    <td class="cart-product product_data mr-2" style="width: 20%" >
+                      <form action="{{route('change_qty', $cart->id)}}" class="d-flex">
+                        @csrf   
+                        @if ($cart->qty == 1)
+                            <button class="btn btn-secondary" disabled>-</button>
+                        @else
+                          <button
+                          type="submit"
+                          value="down"
+                          name="change_to"
+                          class="btn btn-secondary"
+                          > -
+                          </button>                    
+                        @endif                       
+                            <input
+                                type="number"
+                                value="{{$cart->qty}}"
+                                name="qty"
+                                style="width: 20%"
+                                disabled>
+                          @if($cart->qty == 9) <button class="btn btn-secondary" disabled> + </button> @else 
+                            <button
+                                type="submit"
+                                value="up"
+                                name="change_to"
+                                class="btn btn-secondary">
+                                +
+                            </button>
+                          @endif
+                      </form>
                     </td>
-                    <td style="width: 25%;" >
-                      <div class="product-title">{{Str::rupiah( $cart->product->price )}}</div>
+                    @php
+                        $totalRow += $cart->product->price * $cart->qty
+                    @endphp
+                    <td style="width: 20%;" >
+                      <div class="product-title">{{Str::rupiah( $totalRow )}}</div>
                     </td>
                     <td style="width: 20%;">
                       <button class="btn btn-remove-cart" data-toggle="modal" data-target="#deleteCartModal"><i class="bi bi-trash3-fill"></i></button>
@@ -122,7 +153,7 @@
                       </form>
                     </td>
                   </tr>
-                  @php $totalPrice += $cart->product->price @endphp
+                  @php $totalPrice += $totalRow @endphp
                   @endforeach
                 </tbody>
               </table>
@@ -247,30 +278,4 @@
     return false;
   });
 </script>
-{{-- <script>
-  $(document).ready(function(){
-     $('.increment-btn').click(function (e) {
-         e.preventDefault();
-         var incre_value = $(this).parents('.quantity').find('.qty-input').val();
-         var value = parseInt(incre_value, 10);
-         value = isNaN(value) ? 0 : value;
-         if(value<10){
-             value++;
-             $(this).parents('.quantity').find('.qty-input').val(value);
-         }
-     });
-
-     $('.decrement-btn').click(function (e) {
-         e.preventDefault();
-         var decre_value = $(this).parents('.quantity').find('.qty-input').val();
-         var value = parseInt(decre_value, 10);
-         value = isNaN(value) ? 0 : value;
-         if(value>1){
-             value--;
-             $(this).parents('.quantity').find('.qty-input').val(value);
-         }
-     });
-});
-</script> --}}
-
 @endpush
