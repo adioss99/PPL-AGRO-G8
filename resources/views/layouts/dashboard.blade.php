@@ -37,8 +37,8 @@
               ><i class="fa-solid fa-boxes-stacked"></i> Produk</a
             >
             <a
-              href="#"
-              class="list-group-item list-group-item-action"
+              href="{{route('dashboard-transaction')}}"
+              class="list-group-item list-group-item-action {{(request()->is('user/transaction*'))?'active':''}}"
               ><i class="fa-solid fa-dolly"></i> Pesanan</a
             >
             <a

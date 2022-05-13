@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardAccountController;
 use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TransactionController;
 
 // Admin
 use App\Http\Controllers\DashboardAdminController;
@@ -52,14 +53,14 @@ Route::group(['prefix'=>'user','middleware'=>['IsUser','auth','PreventBackHistor
     Route::post('/account/update', [DashboardAccountController::class, 'update'])->name('dashboard-accounts-update');
     Route::get('/products', [DashboardProductController::class, 'index'])->name('dashboard-products');
     Route::get('/products/view/{id}', [DetailProductController::class, 'index'])->name('dashboard-products-details-view');
-
     Route::post('/products/view/{id}', [DetailProductController::class, 'add'])->name('cart-add');
     
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart-delete');
     Route::get('/cart/change-qty/{product}',[ CartController::class, 'changeQty'])->name('change_qty');
-    
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout');
+    
+    Route::get('/transaction', [TransactionController::class, 'index'])->name('dashboard-transaction');
 });
 
 //Admin
