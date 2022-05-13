@@ -29,17 +29,17 @@
             <a
               href="{{route('admin-dashboard')}}"
               class="list-group-item list-group-item-action"
-              >Dashboard</a
+              ><i class="fa-solid fa-gauge"></i> Dashboard</a
             >
             <a
               href="{{route('user.index')}}"
               class="list-group-item list-group-item-action {{(request()->is('admin/user*'))?'active':''}}"
-              >Pengguna</a
+              ><i class="fa-solid fa-users"></i> Pengguna</a
             >
             <a
               href="{{route('product.index')}}"
               class="list-group-item list-group-item-action {{(request()->is('admin/product'))?'active':''}}"
-              >Produk</a
+              ><i class="fa-solid fa-boxes-stacked"></i> Produk</a
             >
             {{-- <a
               href="{{route('product-gallery.index')}}"
@@ -49,12 +49,12 @@
             <a
               href="#"
               class="list-group-item list-group-item-action"
-              >Transaksi</a
+              ><i class="fa-solid fa-cart-flatbed"></i> Pesanan</a
             >
             <a
               href="{{route('admin-dashboard-accounts')}}"
               class="list-group-item list-group-item-action {{(request()->is('admin/account*'))?'active':''}}"
-              >Akun</a
+              ><i class="fa-solid fa-circle-user"></i> Akun</a
             >
           </div>
         </div>

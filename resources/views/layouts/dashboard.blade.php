@@ -29,22 +29,22 @@
             <a
               href="{{route('dashboard')}}"
               class="list-group-item list-group-item-action"
-              >Dashboard</a
+              ><i class="fa-solid fa-gauge"></i> Dashboard</a
             >
             <a
               href="{{route('dashboard-products')}}"
               class="list-group-item list-group-item-action {{(request()->is('user/products*'))?'active':''}}"
-              >Produk</a
+              ><i class="fa-solid fa-boxes-stacked"></i> Produk</a
             >
             <a
               href="#"
               class="list-group-item list-group-item-action"
-              >Transaksi</a
+              ><i class="fa-solid fa-dolly"></i> Pesanan</a
             >
             <a
               href="{{route('dashboard-accounts')}}"
               class="list-group-item list-group-item-action {{(request()->is('user/account*'))?'active':''}}"
-              >Akun</a
+              ><i class="bi bi-person-circle"></i> Akun</a
             >
           </div>
         </div>

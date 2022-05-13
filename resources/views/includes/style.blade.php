@@ -5,5 +5,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.5/datatables.min.css"/>
-
+<script src="https://kit.fontawesome.com/b6eec55ff3.js" crossorigin="anonymous"></script>
  
