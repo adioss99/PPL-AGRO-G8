@@ -3,7 +3,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-Dashboard Produk
+    Produk
 @endsection
 
 @section('content')
