@@ -24,11 +24,15 @@ class CheckoutController extends Controller
 
       $transaction = Transaction::create([
          'users_id' => Auth::user()->id,
-         'shipping_price' => 100000,
+         'shipping_price' => $request->shipping_price,
          'total_price' => $request->total_price,
          'transaction_status' => 'PENDING',
          'resi' => ' ',
-         'code' => $code
+         'code' => $code,
+         'name' => $request->name,
+         'address' => $request->address,
+         'phone' => $request->phone,
+
       ]);
 
       foreach($carts as $cart){

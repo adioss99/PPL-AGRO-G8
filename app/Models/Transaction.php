@@ -18,6 +18,9 @@ class Transaction extends Model
         'resi',        
         'transaction_status',        
         'code',        
+        'name',        
+        'address',        
+        'phone',        
     ];
 
     /**

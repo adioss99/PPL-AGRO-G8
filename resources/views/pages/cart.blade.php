@@ -185,9 +185,9 @@
                     class="form-control"
                     id="addressTwo"
                     aria-describedby="emailHelp"
-                    name="addressTwo"
+                    name="name"
                     value="{{$user->full_name}}"
-                    />
+                    required/>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -197,9 +197,9 @@
                       type="text"
                       class="form-control"
                       id="mobile"
-                      name="mobile"
+                      name="phone"
                       value="{{$user->phone_number}}"
-                    />
+                    required/>
                   </div>
                 </div>
               <div class="col-md-6">
@@ -210,9 +210,9 @@
                     class="form-control"
                     id="addressOne"
                     aria-describedby="emailHelp"
-                    name="addressOne"
+                    name="address"
                     value="{{$user->alamat }}"
-                  />
+                  required/>
                 </div>
               </div>
               <div class="col-md-6">

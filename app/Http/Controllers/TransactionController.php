@@ -30,4 +30,16 @@ class TransactionController extends Controller
             'sent' => $sent,
         ]);
     }
+
+    public function detail($id){
+        $transaction = Transaction::all()
+            ->where('users_id', Auth::user()->id);
+        
+        $detail = TransactionDetail::all()
+            ->where('users_id', Auth::user()->id)
+            ->where('users_id', Auth::user()->id);
+            
+        return view('pages.dashboard-transaction-detail',[
+        ]);
+    }
 }
