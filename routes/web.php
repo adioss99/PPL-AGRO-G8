@@ -61,6 +61,8 @@ Route::group(['prefix'=>'user','middleware'=>['IsUser','auth','PreventBackHistor
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout');
     
     Route::get('/transaction', [TransactionController::class, 'index'])->name('dashboard-transaction');
+    Route::get('/transaction/detail/{id}', [TransactionController::class, 'detail'])->name('transaction-detail');
+
 });
 
 //Admin
