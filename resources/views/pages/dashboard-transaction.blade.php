@@ -40,11 +40,11 @@
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
-                id="pills-ship-tab"
+                id="pills-sent-tab"
                 data-toggle="pill"
-                href="#pills-ship"
+                href="#pills-sent"
                 role="tab"
-                aria-controls="pills-ship"
+                aria-controls="pills-sent"
                 aria-selected="false"
                 >Dikirim</a
               >
@@ -52,11 +52,11 @@
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
-                id="pills-profile-tab"
+                id="pills-done-tab"
                 data-toggle="pill"
-                href="#pills-profile"
+                href="#pills-done"
                 role="tab"
-                aria-controls="pills-profile"
+                aria-controls="pills-done"
                 aria-selected="false"
                 >Selesai</a
               >
@@ -71,7 +71,7 @@
             >
               @foreach ($onProcess as $process)
                   <a
-                    href="#"
+                    href="{{route('transaction-detail',$process->id)}}"
                     class="card card-list d-block"
                   >
                     <div class="card-body">
@@ -83,13 +83,18 @@
                             {{Str::rupiah($process->total_price)}}
                         </div>
                         <div class="col-md-3">
-                            {{ $process->created_at }}
+                          @php
+                            echo date('d-m-Y H:i',strtotime($process->created_at));
+                          @endphp   
                         </div>
                         <div class="col-md-3">
                             {{ $process->transaction_status}}
                         </div>
                         <div class="col-md-1 text-right d-none d-md-block">
-                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                          <img
+                            src="/images/dashboard-arrow-right.svg"
+                            alt=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -98,13 +103,13 @@
             </div>
             <div
               class="tab-pane fade"
-              id="pills-ship"
+              id="pills-sent"
               role="tabpanel"
-              aria-labelledby="pills-ship"
+              aria-labelledby="pills-sent"
             >
               @foreach ($sent as $sent)
                   <a
-                    href="#"
+                    href="{{route('transaction-detail',$sent->id)}}"
                     class="card card-list d-block"
                   >
                     <div class="card-body">
@@ -122,7 +127,10 @@
                             {{ $sent->transaction_status}}
                         </div>
                         <div class="col-md-1 text-right d-none d-md-block">
-                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                          <img
+                            src="/images/dashboard-arrow-right.svg"
+                            alt=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -131,13 +139,13 @@
             </div>
             <div
               class="tab-pane fade"
-              id="pills-profile"
+              id="pills-done"
               role="tabpanel"
-              aria-labelledby="pills-profile-tab"
+              aria-labelledby="pills-done-tab"
             >
               @foreach ($done as $done)
                   <a
-                    href="#"
+                    href="{{route('transaction-detail',$done->id)}}"
                     class="card card-list d-block"
                   >
                     <div class="card-body">
@@ -155,7 +163,10 @@
                             {{ $done->transaction_status}}
                         </div>
                         <div class="col-md-1 text-right d-none d-md-block">
-                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                          <img
+                            src="/images/dashboard-arrow-right.svg"
+                            alt=""
+                          />
                         </div>
                       </div>
                     </div>
