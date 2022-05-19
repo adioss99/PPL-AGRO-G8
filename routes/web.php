@@ -88,6 +88,7 @@ Route::group(['prefix'=>'admin','middleware'=>['IsAdmin','auth','PreventBackHist
     Route::post('/product/gallery/upload', [DashboardProductController::class, 'uploadGallery'])->name('dashboard-products-gallery-upload');
     
     Route::get('/transaction', [adminTransactionController::class, 'index'])->name('admin-transaction');
+    Route::get('/transaction/detail/{id}', [adminTransactionController::class, 'detail'])->name('admin-transaction-detail');
     
 });
 

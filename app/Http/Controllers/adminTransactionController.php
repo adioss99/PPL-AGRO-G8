@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class adminTransactionController extends Controller
@@ -16,7 +18,7 @@ class adminTransactionController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
-                        <a class="btn btn-primary" href="#">
+                        <a class="btn btn-primary" href="' . route('admin-transaction-detail', $item->id) . '">
                             Detail <i class="bi bi-eye-fill"></i>
                         </a>
                         ';
@@ -27,4 +29,18 @@ class adminTransactionController extends Controller
 
         return view('pages.admin-transaction');
     }
+
+    public function detail($id){
+        $transaction = Transaction::find($id);
+        
+        $detail = TransactionDetail::with(['transaction.user','product.galleries'])
+            ->where('transactions_id',$id)
+            ->get();
+
+        return view('pages.admin-transaction-detail',[
+            'transaction' => $transaction,
+            'detail' => $detail,
+        ]);
+    }
+
 }
