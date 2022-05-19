@@ -83,7 +83,9 @@ Product list
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
-                { data: 'price', name: 'price' },
+                { data: 'price',
+                  render: $.fn.dataTable.render.number( '.', ',', 0, 'Rp.' )
+                },
                 { data: 'user.full_name', name: 'user.full_name' },
                 {
                     data: 'action',
