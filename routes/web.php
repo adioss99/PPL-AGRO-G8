@@ -19,6 +19,7 @@ use App\Http\Controllers\DashboardAdminAccountController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
+use App\Http\Controllers\adminTransactionController;
 use App\Http\Controllers\CheckoutController;
 
 /*
@@ -85,6 +86,8 @@ Route::group(['prefix'=>'admin','middleware'=>['IsAdmin','auth','PreventBackHist
     Route::post('/product/edit/{id}', [DashboardProductController::class, 'update'])->name('dashboard-products-update');
     Route::get('/product/gallery/delete/{id}', [DashboardProductController::class, 'deleteGallery'])->name('dashboard-products-gallery-delete');
     Route::post('/product/gallery/upload', [DashboardProductController::class, 'uploadGallery'])->name('dashboard-products-gallery-upload');
+    
+    Route::get('/transaction', [adminTransactionController::class, 'index'])->name('admin-transaction');
     
 });
 
