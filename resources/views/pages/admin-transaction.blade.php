@@ -163,7 +163,7 @@
         table('#myTable1','PENDING');
         table('#myTable2','DIPROSES');
         table('#myTable3','DIKIRIM');
-        table('#myTable4','SELESAI');
+        table('#myTable4','DITERIMA');
 
     </script>
 @endpush

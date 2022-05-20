@@ -43,4 +43,15 @@ class adminTransactionController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        
+        $item = Transaction::findOrFail($id);
+        
+        $item->update($data);
+        
+        return redirect()->route('admin-transaction-detail', $id);
+    }
+
 }

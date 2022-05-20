@@ -10,11 +10,14 @@ use Illuminate\Http\Request;
 class TransactionController extends Controller
 {
     public function index(){
+        
+        $pay = Transaction::all()
+            ->where('users_id', Auth::user()->id)
+            ->where('transaction_status','PENDING');
                             
         $onProcess = Transaction::all()
             ->where('users_id', Auth::user()->id)
-            ->where('transaction_status','!=','SELESAI')
-            ->where('transaction_status','!=','DIKIRIM');
+            ->where('transaction_status','DIPROSES');
 
         $sent = Transaction::all()
             ->where('users_id', Auth::user()->id)
@@ -22,12 +25,13 @@ class TransactionController extends Controller
 
         $done = Transaction::all()
             ->where('users_id', Auth::user()->id)
-            ->where('transaction_status','SELESAI');
+            ->where('transaction_status','DITERIMA');
 
         return view('pages.dashboard-transaction',[
+            'pay' => $pay,
             'onProcess' => $onProcess,
-            'done' => $done,
             'sent' => $sent,
+            'done' => $done,
         ]);
     }
 
@@ -35,7 +39,6 @@ class TransactionController extends Controller
         $transaction = Transaction::all()
         ->where('users_id', Auth::user()->id)
         ->find($id);
-        // dd($transaction->resi);
         
         $detail = TransactionDetail::with(['transaction.user','product.galleries'])
             ->whereHas('transaction', function($transaction){
@@ -43,11 +46,21 @@ class TransactionController extends Controller
             })->where('transactions_id',$id)
             ->get();
 
-        // dd($detail);
-
         return view('pages.dashboard-transaction-detail',[
             'transaction' => $transaction,
             'detail' => $detail,
         ]);
     }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        
+        $item = Transaction::findOrFail($id);
+        
+        $item->update($data);
+        
+        return redirect()->route('transaction-detail', $id)->with('success','Pesanan Telah Diterima');
+    }
+
 }

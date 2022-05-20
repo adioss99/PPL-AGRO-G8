@@ -4,6 +4,52 @@
     Detail Transaksi
 @endsection
 
+@push('modal')
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateLabel">Update data transaksi <i class="fa-solid fa-square-pen"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Simpan Perubahan?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <a type="button" class="yesSave btn btn-success text-white" >Ya</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="verifikasiModal" tabindex="-1" role="dialog" aria-labelledby="verifikasiModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="verifikasiLabel">Verifikasi Pembayaran <i class="fa-solid text-success fa-money-bill-wave"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin untuk memverifikasi pembayaran pesanan {{ $transaction->code }}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>        
+        <form action="{{route('admin-transaction-update',$transaction->id)}}" method="POST" enctype="multipart/form-data">
+        @csrf
+          <input type="text" name="transaction_status" value="DIPROSES" hidden>
+          <button type="submit" class="btn btn-success text-white" >Ya</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endpush
+
 @section('content')
 <!-- Section Content -->
 <div
@@ -153,37 +199,65 @@
                 </div>
                 @if ($transaction->transaction_status == "PENDING")
                 <div class="col-12 col-md-3">
-                  <button type="button" class="btn btn-outline-success btn-block mt-3" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-hand-holding-dollar"></i> Verifikasi Pembayaran</button>
+                  <button type="button" class="btn btn-outline-success btn-block mt-3" data-toggle="modal" data-target="#verifikasiModal"><i class="fa-solid fa-hand-holding-dollar"></i> Verifikasi Pembayaran</button>
                 </div>
                 @endif
               </div>
               <hr>
               {{-- Informasi Pesanan --}}
-              <div class="row">
-                <div class="col-12 mt-2">
-                  <h5>Informasi Pesanan</h5>
-                </div>
-                <div class="col-12 col-md-3">
-                  <div class="product-title">Status Pembayaran</div>
-                  <div class="product-subtitle">
-                      {{ $transaction->transaction_status }}
+              <form action="{{route('admin-transaction-update',$transaction->id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                  <div class="col-12 mt-2">
+                    <h5>Informasi Pesanan</h5>
+                  </div>
+                    <div class="col-12 col-md-3">
+                      <div class="product-title">Status Pesanan</div>
+                      <div class="product-subtitle">
+                          <select
+                              name="transaction_status"
+                              id="status"
+                              class="form-control"
+                              v-model="status">
+                            <option value="{{$transaction->transaction_status	}}">
+                              -{{$transaction->transaction_status	}}-</option>
+                            <hr>
+                            <option value="PENDING">PENDING</option>
+                            <option value="DIPROSES">DIPROSES</option>
+                            <option value="DIKIRIM">DIKIRIM</option>
+                            <option value="DITERIMA">DITERIMA</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <div class="product-title">Kode Resi</div>
+                      <div class="product-subtitle">
+                        <input type="text" class="form-control" name="resi" v-model="resi" value="{{$transaction->resi}}">        
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <div class="product-title">Diperbarui Pada</div>
+                      <div class="product-subtitle">
+                        @php
+                          echo date('d-m-Y H:i',strtotime($transaction->updated_at));
+                        @endphp      
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">                    
+                      <button type="submit" class="btn finalSave btn-block btn-success px-5 mt-3 mr-3" hidden>Simpan</button>
+                      @if(($transaction->transaction_status == "DITERIMA"))          
+                        <div class="product-subtitle text-success mt-3">
+                          Pesanan telah diterima  <i class="fa-solid fa-check text-success"></i>
+                        </div>
+                      @endif
+                    </div>
+                  </div>
+                </form>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <button class="btn btn-block btn-success px-5 mt-3 mr-3"  data-toggle="modal" data-target="#updateModal"><i class="fa-solid fa-check"></i> Simpan</button>
                   </div>
                 </div>
-                <div class="col-12 col-md-3">
-                  <div class="product-title">Status Pesanan</div>
-                  <div class="product-subtitle">
-                      {{ $transaction->transaction_status }}
-                  </div>
-                </div>
-                <div class="col-12 col-md-3">
-                  <div class="product-title">Kode Resi</div>
-                  @if ($transaction->resi != " ")
-                    <p class="product-subtitle" id="resi">
-                      {{$transaction->resi }} <button class="btn btn-white fa-xs" onclick="copyToClipboard('#resi')"><i class="fa-solid fa-copy"></i></button>
-                    </p>                      
-                  @endif
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -194,13 +268,11 @@
 @endsection
 
 @push('addon-script')
-    <script>
-      function copyToClipboard(element) {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(element).text()).select();
-        document.execCommand("copy");
-        $temp.remove();
-      }
-    </script>
+<script>
+// delete script
+  $(".yesSave").click(function(){
+    $(".finalSave").click(); 
+    return false;
+  });
+</script>
 @endpush

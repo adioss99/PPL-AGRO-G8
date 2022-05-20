@@ -28,6 +28,18 @@
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link active"
+                id="pills-pay-tab"
+                data-toggle="pill"
+                href="#pills-pay"
+                role="tab"
+                aria-controls="pills-pay"
+                aria-selected="true"
+                >Belum Dibayar</a
+              >
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
                 id="pills-home-tab"
                 data-toggle="pill"
                 href="#pills-home"
@@ -65,6 +77,44 @@
           <div class="tab-content" id="pills-tabContent">
             <div
               class="tab-pane fade show active"
+              id="pills-pay"
+              role="tabpanel"
+              aria-labelledby="pills-pay-tab"
+            >
+              @foreach ($pay as $pay)
+                  <a
+                    href="{{route('transaction-detail',$pay->id)}}"
+                    class="card card-list d-block"
+                  >
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-2">                          
+                            {{ $pay->code }}
+                        </div>
+                        <div class="col-md-3">
+                            {{Str::rupiah($pay->total_price)}}
+                        </div>
+                        <div class="col-md-3">
+                          @php
+                            echo date('d-m-Y H:i',strtotime($pay->created_at));
+                          @endphp   
+                        </div>
+                        <div class="col-md-3">
+                            {{ $pay->transaction_status}}
+                        </div>
+                        <div class="col-md-1 text-right d-none d-md-block">
+                          <img
+                            src="/images/dashboard-arrow-right.svg"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+              @endforeach
+            </div>
+            <div
+              class="tab-pane fade"
               id="pills-home"
               role="tabpanel"
               aria-labelledby="pills-home-tab"
