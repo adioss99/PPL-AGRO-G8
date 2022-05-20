@@ -24,7 +24,7 @@
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
           <div class="sidebar-heading text-center">
-            <img src="/images/db-logo.svg" alt="" class="my-4" />
+            <img src="/images/newlogo.svg" alt="" class="my-4" />
           </div>
           <div class="list-group list-group-flush">
             <a
