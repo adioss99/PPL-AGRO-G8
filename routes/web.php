@@ -63,6 +63,7 @@ Route::group(['prefix'=>'user','middleware'=>['IsUser','auth','PreventBackHistor
     
     Route::get('/transaction', [TransactionController::class, 'index'])->name('dashboard-transaction');
     Route::get('/transaction/detail/{id}', [TransactionController::class, 'detail'])->name('transaction-detail');
+    Route::post('/transaction/detail/{id}', [TransactionController::class, 'update'])->name('transaction-update');
 
 });
 
@@ -89,7 +90,7 @@ Route::group(['prefix'=>'admin','middleware'=>['IsAdmin','auth','PreventBackHist
     
     Route::get('/transaction', [adminTransactionController::class, 'index'])->name('admin-transaction');
     Route::get('/transaction/detail/{id}', [adminTransactionController::class, 'detail'])->name('admin-transaction-detail');
-    
+    Route::post('/transaction/detail/{id}', [adminTransactionController::class, 'update'])->name('admin-transaction-update');
 });
 
 

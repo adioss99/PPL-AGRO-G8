@@ -10,7 +10,6 @@
         <div class="dashboard-heading">
             <h2 class="dashboard-title">Edit Produk</h2>
             <br>
-        {{-- <p class="dashboard-subtitle">Detail produk</p> --}}
         </div>
         <div class="dashboard-content">
             <div class="row">
@@ -69,11 +68,11 @@
                                         <label for="description">Deskripsi</label>
                                         <textarea name="description" class="form-control">{!! $product->description !!}</textarea>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col text-right">
-                                        <a class="btn btn-secondary mr-1 text-white px-5" href="{{route('product.index')}}">Batal</a>
-                                        <button type="submit" class="btn btn-success px-5">Simpan</button>
+                                    <div class="row">
+                                        <div class="col text-right">
+                                            <a class="btn btn-secondary mr-1 text-white px-5" href="{{route('product.index')}}">Batal</a>
+                                            <button type="submit" class="btn btn-success px-5">Simpan</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

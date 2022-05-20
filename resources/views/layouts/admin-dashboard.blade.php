@@ -18,6 +18,7 @@
   </head>
 
   <body>
+    @stack('modal')
     <div class="page-dashboard">
       <div class="d-flex" id="wrapper" data-aos="fade-right">
         <!-- Sidebar -->
@@ -38,14 +39,9 @@
             >
             <a
               href="{{route('product.index')}}"
-              class="list-group-item list-group-item-action {{(request()->is('admin/product'))?'active':''}}"
+              class="list-group-item list-group-item-action {{(request()->is('admin/product*'))?'active':''}}"
               ><i class="fa-solid fa-boxes-stacked"></i> Produk</a
             >
-            {{-- <a
-              href="{{route('product-gallery.index')}}"
-              class="list-group-item list-group-item-action {{(request()->is('admin/product-gallery'))?'active':''}}"
-              >Galeri</a
-            > --}}
             <a
               href="{{route('admin-transaction')}}"
               class="list-group-item list-group-item-action {{(request()->is('admin/transaction*'))?'active':''}}"
