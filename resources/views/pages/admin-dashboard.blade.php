@@ -16,7 +16,7 @@
         </div>
         <div class="dashboard-content">
             <div class="row  mt-4">
-                <a class="btn col-md-4" href="{{route('user.index')}}">
+                <a class="btn col-md-6" href="{{route('user.index')}}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="dashboard-card-title">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="btn col-md-4" href="{{route('dashboard-products')}}">
+                <a class="btn col-md-6" href="{{route('product.index')}}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="dashboard-card-title">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="btn col-md-4" href="{{route('dashboard-transaction')}}">
+                {{-- <a class="btn col-md-4" href="{{route('admin-transaction')}}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="dashboard-card-title">
@@ -51,10 +51,10 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </a> --}}
             </div>
             <div class="row mt-3">
-                <div class="col-md-3">
+                <a class="btn col-md-3" href="{{route('admin-transaction')}}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="dashboard-card-title">
@@ -65,8 +65,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
+                </a>
+                <a  class="btn col-md-3" href="{{route('admin-transaction')}}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="dashboard-card-title">
@@ -77,8 +77,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
+                </a>
+                <a  class="btn col-md-3" href="{{route('admin-transaction')}}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="dashboard-card-title">
@@ -89,8 +89,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
+                </a>
+                <a  class="btn col-md-3" href="{{route('admin-transaction')}}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="dashboard-card-title">
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

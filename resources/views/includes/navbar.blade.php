@@ -16,7 +16,7 @@
                 <a href="{{ route('register')}}" class="nav-link">Daftar</a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('login')}}" class="btn btn-success nav-link px-4 text-light">Masuk</a>
+                <a href="{{ route('login')}}" class="btn nav-link px-4 text-white" style="background-color: #29A867">Masuk</a>
             </li>
         </ul>
             @endguest

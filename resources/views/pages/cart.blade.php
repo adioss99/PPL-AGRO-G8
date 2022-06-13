@@ -136,7 +136,7 @@
               @endforeach
             </tbody>
           </table>
-          @php $ongkir = 100000 @endphp
+          @php $ongkir = 0 @endphp
           @php $total = $ongkir + $totalPrice @endphp
         </div>
       </div>

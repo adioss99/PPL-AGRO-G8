@@ -77,7 +77,7 @@
                       type="submit"
                       class="btn btn-success px-4 text-white btn-block mb-3"
                     >
-                      Add to Cart
+                      Tambahkan <i class="fa-solid fa-cart-plus"></i>
                     </button>
                   </form>
                 </div>

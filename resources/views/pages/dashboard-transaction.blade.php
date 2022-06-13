@@ -171,7 +171,9 @@
                             {{Str::rupiah($sent->total_price)}}
                         </div>
                         <div class="col-md-3">
-                            {{ $sent->created_at }}
+                          @php
+                            echo date('d-m-Y H:i',strtotime($process->created_at));
+                          @endphp   
                         </div>
                         <div class="col-md-3">
                             {{ $sent->transaction_status}}

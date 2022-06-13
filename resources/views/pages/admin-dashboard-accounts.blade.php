@@ -14,7 +14,7 @@
               <div class="dashboard-heading">
                 <h2 class="dashboard-title">Akun</h2>
                 <p class="dashboard-subtitle">
-                  Perbarui akun anda
+                 <br>
                 </p>
               </div>
               <div class="dashboard-content">
